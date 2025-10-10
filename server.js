@@ -21,21 +21,26 @@ const allowedOrigins = [
 
 const corsOptions = {
   origin: function (origin, callback) {
-    console.log('Request Origin:', origin); 
+    console.log('Request Origin:', origin);
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       console.warn('❌ CORS blocked origin:', origin);
-      callback(null, false);
+      callback(new Error('Not allowed by CORS'));
     }
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
+  credentials: true,
+  optionsSuccessStatus: 200 // Ensure preflight OPTIONS requests return 200
 };
 
 // Apply CORS middleware before routes
 app.use(cors(corsOptions));
+
+// Explicitly handle OPTIONS requests for all routes
+app.options('*', cors(corsOptions));
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
