@@ -1,5 +1,5 @@
 const admin = require('firebase-admin');
-const User = require('../models/User');
+const User = require('../models/user');
 
 exports.signup = async (req, res) => {
   const { idToken, username } = req.body;
