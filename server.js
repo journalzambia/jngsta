@@ -21,6 +21,7 @@ const allowedOrigins = [
 
 const corsOptions = {
   origin: function (origin, callback) {
+    console.log('Request Origin:', origin); 
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -32,6 +33,9 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 };
+
+// Apply CORS middleware before routes
+app.use(cors(corsOptions));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
