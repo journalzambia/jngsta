@@ -16,6 +16,7 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:3000',
   'https://jngsta.net',
+  'https://jngsta.onrender.com',
 ];
 
 app.use(cors({
