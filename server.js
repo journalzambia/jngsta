@@ -54,6 +54,12 @@ app.use('/api/admin/volumes', require('./routes/adminVolumeRoutes'));
 app.use('/api/admin/issues', require('./routes/adminIssueRoutes'));
 app.use('/api/admin/articles', require('./routes/adminArticleRoutes'));
 
+
+// Root route for testing
+app.get('/', (req, res) => {
+  res.json({ message: 'Welcome to the JNGSTA API!' });
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
