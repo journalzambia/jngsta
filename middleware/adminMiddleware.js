@@ -1,6 +1,6 @@
 // middleware/adminMiddleware.js
 const admin = require('../firebaseAdmin');
-const User = require('../models/user');
+const User = require('../models/User');
 
 const adminMiddleware = async (req, res, next) => {
   try {

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const User = require('../models/user');
+const User = require('../models/User');
 const Submission = require('../models/Submission');
 const admin = require('firebase-admin');
 
