@@ -6,6 +6,7 @@ const authRoutes = require('./routes/auth');
 const submissionRoutes = require('./routes/submissionRoutes');
 const adminRoutes = require('./routes/admin');
 const path = require('path');
+const session = require('express-session');
 
 // Initialize Firebase Admin SDK
 require('./firebaseAdmin');
@@ -35,6 +36,16 @@ methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Add PATCH here
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
+
+app.use(session({
+  secret: 'your-secret-key-change-this',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { 
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }
+}));
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
